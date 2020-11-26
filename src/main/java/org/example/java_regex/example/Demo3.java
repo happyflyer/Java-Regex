@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 数字范围匹配
+ * img 标签匹配
  *
  * @author lifei
  */

@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 数字范围匹配
+ * 贪婪模式与非贪婪模式
  *
  * @author lifei
  */
