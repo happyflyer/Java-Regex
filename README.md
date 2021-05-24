@@ -1,8 +1,13 @@
-# Java Regex
+# [Java Regex](https://github.com/happyflyer/Java-Regex)
 
-## 1. [什么是正则表达式](http://www.runoob.com/regexp/regexp-syntax.html)
+- [正则表达式 - 语法](http://www.runoob.com/regexp/regexp-syntax.html)
+- [Java 正则表达式详解](https://segmentfault.com/a/1190000009162306)
 
-正则表达式(Regular Expression, regex): 定义一个**搜索模式**(pattern)的**字符串**。
+## 1. 什么是正则表达式
+
+正则表达式(Regular Expression, regex)
+
+- 定义一个**搜索模式**(pattern)的**字符串**
 
 例如：
 
@@ -12,7 +17,11 @@
 
 正则表达式可以用于**搜索**、**编辑**和**操作**文本。
 
-正则表达式对文本的分析或修改过程为：首先正则表达式应用的是文本字符串(text/string)，它会以定义的模式**从左到右**匹配文本，每个源字符只匹配一次。
+正则表达式对文本的分析或修改过程
+
+- 首先正则表达式应用的是文本字符串(text/string)
+- 它会以定义的模式**从左到右**匹配文本
+- 每个源字符只匹配一次
 
 ## 2. 语法规则
 
@@ -60,18 +69,26 @@
 
 `*`、`+` 限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个 `?` 就可以实现非贪婪或最小匹配。
 
-## 3. [Java 的正则表达式](https://segmentfault.com/a/1190000009162306)
+## 3. Java 的正则表达式
 
 ### 3.1. Java 中的反斜杠
 
 反斜杠 `\` 在 Java 中表示转义字符，这意味着 `\` 在 Java 拥有预定义的含义。
 
-这里例举两个特别重要的用法：
+这里例举两个特别重要的用法
 
-1. 在匹配 `.` 或 `{`、`[`、`(`、`?`、`$`、`^`、`*` 这些特殊字符时，需要在前面加上 `\\`，比如匹配 `.` 时，Java 中要写为 `\\.`，但对于正则表达式来说是 `\.`
-2. 在匹配 `\` 时，Java 中要写为 `\\\\`，但对于正则表达式来说就是 `\\`
+- 在匹配 `.` 或 `{`、`[`、`(`、`?`、`$`、`^`、`*` 这些特殊字符时
+  - 需要在前面加上 `\\`
+  - 比如匹配 `.` 时，Java 中要写为 `\\.`
+  - 但对于正则表达式来说是 `\.`
+- 在匹配 `\` 时
+  - Java 中要写为 `\\\\`
+  - 但对于正则表达式来说就是 `\\`
 
-Java 中的正则表达式字符串有两层含义，首先 Java 字符串转义出符合正则表达式语法的字符串，然后再由转义后的正则表达式进行模式匹配。
+Java 中的正则表达式字符串有两层含义
+
+- 首先 Java 字符串转义出符合正则表达式语法的字符串
+- 然后再由转义后的正则表达式进行模式匹配
 
 ### 3.2. String 的正则处理方法
 
@@ -148,9 +165,17 @@ final Pattern pattern = Pattern.compile("(?i)\\w+"); // 推荐写法
 
 $$(第一组)(第二组)(第三组)...(第n组)$$
 
-模式分组后会在正则表达式中创建**反向引用**。反向引用会保存匹配模式分组的字符串片断，这使得我们可以获取并使用这个字符串片断。
+- 模式分组后会在正则表达式中创建**反向引用**
+- 反向引用会保存匹配模式分组的字符串片断
+- 这使得我们可以获取并使用这个字符串片断
 
-在以正则表达式替换字符串的语法中，是通过 `$` 来引用分组的反向引用，`$0` 是匹配完整模式的字符串(在 JavaScript 中是用 `$&` 表示)；`$1` 是第一个分组的反向引用；`$2` 是第二个分组的反向引用，以此类推。
+在以正则表达式替换字符串的语法中
+
+- 是通过 `$` 来引用分组的反向引用
+- `$0` 是匹配完整模式的字符串(在 JavaScript 中是用 `$&` 表示)
+- `$1` 是第一个分组的反向引用
+- `$2` 是第二个分组的反向引用
+- 以此类推
 
 ```java
 String str = "img.jpg.jpg.png.jpg";
@@ -171,8 +196,8 @@ while (matcher.find()) {
 
 ```java
 String str = "img.jpg.jpg.png.jpg";
-final Pattern pattern2 = Pattern.compile("(?:jpg|png)");
-Matcher matcher2 = pattern2.matcher(str);
+final Pattern pattern = Pattern.compile("(?:jpg|png)");
+Matcher matcher2 = pattern.matcher(str);
 while (matcher2.find()) {
     System.out.println(matcher2.start());
     System.out.println(matcher2.end());
@@ -222,19 +247,19 @@ while (matcher.find()) {
 - `(?m)` 表示**多行模式**，使正则表达式的 `^` 和 `$` 匹配字符串中每行的开始和结束
 
 ```java
-String Str = "Hello , World .";
+String str = "Hello , World .";
 String pattern = "(\\w)(\\s+)([.,])";
 // $0 匹配 `(\w)(\s+)([.,])` 结果为 `o空格,` 和 `d空格.`
 // $1 匹配 `(\w)` 结果为 `o` 和 `d`
 // $2 匹配 `(\s+)` 结果为 `空格` 和 `空格`
 // $3 匹配 `([.,])` 结果为 `,` 和 `.`
-System.out.println("str: " + Str);
+System.out.println("str: " + str);
 System.out.println("pattern: " + pattern);
-System.out.println("s0: " + Str.replaceAll(pattern, "$0"));
-System.out.println("s1: " + Str.replaceAll(pattern, "$1"));
-System.out.println("s2: " + Str.replaceAll(pattern, "$2"));
-System.out.println("s3: " + Str.replaceAll(pattern, "$3"));
-System.out.println("result: " + Str.replaceAll(pattern, "$1$3"));
+System.out.println("s0: " + str.replaceAll(pattern, "$0"));
+System.out.println("s1: " + str.replaceAll(pattern, "$1"));
+System.out.println("s2: " + str.replaceAll(pattern, "$2"));
+System.out.println("s3: " + str.replaceAll(pattern, "$3"));
+System.out.println("result: " + str.replaceAll(pattern, "$1$3"));
 ```
 
 ```java

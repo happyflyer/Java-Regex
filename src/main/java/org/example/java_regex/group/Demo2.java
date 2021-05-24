@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 public class Demo2 {
     public static void main(String[] args) {
         String str = "img.jpg.jpg.png.jpg";
-        final Pattern pattern2 = Pattern.compile("(?:jpg|png)");
-        Matcher matcher2 = pattern2.matcher(str);
+        final Pattern pattern = Pattern.compile("(?:jpg|png)");
+        Matcher matcher2 = pattern.matcher(str);
         while (matcher2.find()) {
             System.out.println(matcher2.start());
             System.out.println(matcher2.end());
